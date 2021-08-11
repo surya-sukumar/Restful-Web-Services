@@ -1,4 +1,4 @@
-package com.example.Springbootservices.restfulwebservices;
+package com.example.Springbootservices.restfulwebservices.user;
 
 public class User {
 
