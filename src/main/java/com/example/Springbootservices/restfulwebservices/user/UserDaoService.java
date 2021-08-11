@@ -1,9 +1,12 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
 //using static array to save data initially
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserDaoService {
 
     private static List<User> users = new ArrayList<>();
@@ -14,7 +17,7 @@ public class UserDaoService {
         users.add(new User(3, "Aditya","Front End"));
     }
 
-    public static List<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
