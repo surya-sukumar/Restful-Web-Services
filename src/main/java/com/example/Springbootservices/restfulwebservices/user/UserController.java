@@ -21,7 +21,10 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User getOneUser(@PathVariable int id){
-        return userDaoService.findOne(id);
+        User user = userDaoService.findOne(id);
+        if(user==null)
+            throw new UserNotFoundException("id-"+id);
+        return user;
     }
 
     @PostMapping("/users")
@@ -33,5 +36,13 @@ public class UserController {
         return ResponseEntity.created(location).build();
     }
 
+    @DeleteMapping("/users/{id}")
+    public User removeUser(@PathVariable int id){
+
+        User user = userDaoService.deleteById(id);
+        if(user==null)
+            throw new UserNotFoundException("id-"+id);
+        return user;
+    }
 
 }
