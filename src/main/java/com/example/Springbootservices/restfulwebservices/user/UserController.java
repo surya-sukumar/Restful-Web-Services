@@ -1,8 +1,14 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -21,11 +27,19 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getOneUser(@PathVariable int id){
+    public EntityModel<User> getOneUser(@PathVariable int id){
         User user = userDaoService.findOne(id);
         if(user==null)
             throw new UserNotFoundException("id-"+id);
-        return user;
+
+        //Providing Link to All Users
+        //Resource<T> --- EntityModel<T>
+        EntityModel<User> resource = new EntityModel<User>(user);//Creating Resource with User class
+        WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).users());//Adding link to "/users"
+        resource.add(link.withRel("all-users"));//Adding the link to the resource
+        //HATEOAS
+
+        return resource;
     }
 
     @PostMapping("/users")
