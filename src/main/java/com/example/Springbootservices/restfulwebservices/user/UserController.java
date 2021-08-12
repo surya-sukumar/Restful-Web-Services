@@ -2,6 +2,7 @@ package com.example.Springbootservices.restfulwebservices.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
+import org.springframework.web.servlet.LocaleContextResolver;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -65,9 +67,10 @@ public class UserController {
         return user;
     }
 
+    //(@RequestHeader(name = "Accept-Language", required = false) Locale locale) instead of this
     @GetMapping("/hello-world-internationalized")
-    public String helloWorldInternationalized(@RequestHeader(name = "Accept-Language", required = false) Locale locale){
-        return messageSource.getMessage("good.morning.message",null,locale);
+    public String helloWorldInternationalized(){
+        return messageSource.getMessage("good.morning.message",null, LocaleContextHolder.getLocale());
     }
 
 }

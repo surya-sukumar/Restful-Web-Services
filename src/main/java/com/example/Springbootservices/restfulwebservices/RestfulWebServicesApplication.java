@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
@@ -22,7 +23,8 @@ public class RestfulWebServicesApplication {
 
 	@Bean//What message to display
 	public LocaleResolver localeResolver(){
-		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+		//SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
 		localeResolver.setDefaultLocale(Locale.US);
 		return localeResolver;
 	}
@@ -30,7 +32,7 @@ public class RestfulWebServicesApplication {
 	@Bean//configuring message source
 	public ResourceBundleMessageSource bundleMessageSource(){
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("messages");
+		//messageSource.setBasename("messages"); added in application.properties
 		return messageSource;
 	}
 
