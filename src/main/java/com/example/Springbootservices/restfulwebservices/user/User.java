@@ -1,9 +1,15 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
+@Valid
 public class User {
 
     private int id;
+    @Size(min = 2)
     private String name;
+    @Size(min = 2)
     private String tech;
 
     public User(int id, String name, String tech) {
