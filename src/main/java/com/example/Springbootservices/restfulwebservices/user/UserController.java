@@ -1,6 +1,7 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 public class UserController {
 
     @Autowired
     private UserDaoService userDaoService;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @GetMapping("/users")
     public List<User> users(){
@@ -58,6 +63,11 @@ public class UserController {
         if(user==null)
             throw new UserNotFoundException("id-"+id);
         return user;
+    }
+
+    @GetMapping("/hello-world-internationalized")
+    public String helloWorldInternationalized(@RequestHeader(name = "Accept-Language", required = false) Locale locale){
+        return messageSource.getMessage("good.morning.message",null,locale);
     }
 
 }
