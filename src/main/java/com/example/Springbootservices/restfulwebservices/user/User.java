@@ -16,6 +16,10 @@ public class User {
     @Size(min = 2)
     private String tech;
 
+    //For JPA related queries this constructor is mandatory
+    public User() {
+    }
+
     public User(int id, String name, String tech) {
         this.id = id;
         this.name = name;
