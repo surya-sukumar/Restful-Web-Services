@@ -1,4 +1,4 @@
-package com.example.Springbootservices.restfulwebservices.entity;
+/*package com.example.Springbootservices.restfulwebservices.entity;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,3 +18,4 @@ public class UserDAOService {
         return user.getId();
     }
 }
+*/

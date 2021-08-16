@@ -1,4 +1,4 @@
-package com.example.Springbootservices.restfulwebservices.entity;
+/*package com.example.Springbootservices.restfulwebservices.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,3 +54,4 @@ public class User {
                 '}';
     }
 }
+*/

@@ -1,11 +1,15 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 @Valid
+@Entity
 public class User {
 
+    @Id
     private int id;
     @Size(min = 2)
     private String name;

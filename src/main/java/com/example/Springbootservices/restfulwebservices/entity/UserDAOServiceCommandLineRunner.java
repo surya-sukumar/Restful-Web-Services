@@ -1,4 +1,4 @@
-package com.example.Springbootservices.restfulwebservices.entity;
+/*package com.example.Springbootservices.restfulwebservices.entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,3 +22,4 @@ public class UserDAOServiceCommandLineRunner implements CommandLineRunner {
         logger.info("New user is added "+user);
     }
 }
+*/
