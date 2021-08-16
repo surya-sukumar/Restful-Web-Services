@@ -2,8 +2,10 @@ package com.example.Springbootservices.restfulwebservices.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Valid
 @Entity
@@ -15,8 +17,14 @@ public class User {
     private String name;
     @Size(min = 2)
     private String tech;
+    @OneToMany(mappedBy = "user")//relationship column of user in post
+    private List<Post> posts;
 
     //For JPA related queries this constructor is mandatory
+    //All persistent classes must have a default constructor
+    // so that Hibernate can instantiate them using Constructor.newInstance(). It is recommended
+    // that you have a default constructor with at least package visibility for runtime
+    // proxy generation in Hibernate. so you must add a default constructor.
     public User() {
     }
 
@@ -48,6 +56,14 @@ public class User {
 
     public void setTech(String tech) {
         this.tech = tech;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
