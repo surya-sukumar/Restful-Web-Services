@@ -1,5 +1,7 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -18,6 +20,7 @@ public class User {
     @Size(min = 2)
     private String tech;
     @OneToMany(mappedBy = "user")//relationship column of user in post
+    @JsonIgnore
     private List<Post> posts;
 
     //For JPA related queries this constructor is mandatory

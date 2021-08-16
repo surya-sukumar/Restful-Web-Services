@@ -21,6 +21,9 @@ public class UserJpaResource {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PostRepository postRepository;
+
     @GetMapping("/jpa/users")
     public List<User> users(){
         return userRepository.findAll();
@@ -43,6 +46,16 @@ public class UserJpaResource {
         return resource;
     }
 
+    @GetMapping("/jpa/users/{id}/posts")
+    public List<Post> getPosts(@PathVariable int id){
+        Optional<User> user = userRepository.findById(id);
+
+        if(!user.isPresent())
+            throw new UserNotFoundException("id-"+id);
+
+        return user.get().getPosts();//leads to recursive call between user and post so add @Jsonignore to user in posts
+    }
+
     @PostMapping("/jpa/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
         User savedUser = userRepository.save(user);
@@ -52,9 +65,26 @@ public class UserJpaResource {
         return ResponseEntity.created(location).build();
     }
 
+    @PostMapping("/jpa/users/{id}/posts")
+    public ResponseEntity<Object> createPosts(@PathVariable int id,@RequestBody Post post){
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(!optionalUser.isPresent())
+            throw new UserNotFoundException("id-"+id);
+
+        User user = optionalUser.get();
+        post.setUser(user);
+        postRepository.save(post);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId()).toUri();
+        //return status and the user added
+        return ResponseEntity.created(location).build();
+
+    }
+
     @DeleteMapping("/jpa/users/{id}")
     public void delete(@PathVariable int id){
         userRepository.deleteById(id);
     }
+
 
 }
