@@ -2,6 +2,7 @@ package com.example.Springbootservices.restfulwebservices.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,10 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Valid
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 public class User {
 
@@ -30,16 +35,15 @@ public class User {
     // so that Hibernate can instantiate them using Constructor.newInstance(). It is recommended
     // that you have a default constructor with at least package visibility for runtime
     // proxy generation in Hibernate. so you must add a default constructor.
-    public User() {
-    }
-
+   /* public User() {
+    }*/
     public User(int id, String name, String tech) {
         this.id = id;
         this.name = name;
         this.tech = tech;
     }
 
-    public int getId() {
+   /* public int getId() {
         return id;
     }
 
@@ -78,5 +82,5 @@ public class User {
                 ", name='" + name + '\'' +
                 ", tech='" + tech + '\'' +
                 '}';
-    }
+    }*/
 }

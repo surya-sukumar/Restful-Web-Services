@@ -1,9 +1,15 @@
 package com.example.Springbootservices.restfulwebservices.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@ToString
 @Entity
 public class Post {
     @Id
@@ -13,7 +19,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)//will not retrieve the user unless u call post.getuser
     private User user;
 
-    public int getId() {
+    /*public int getId() {
         return id;
     }
 
@@ -43,5 +49,5 @@ public class Post {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';
-    }
+    }*/
 }
