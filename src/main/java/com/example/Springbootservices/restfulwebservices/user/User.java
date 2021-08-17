@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
