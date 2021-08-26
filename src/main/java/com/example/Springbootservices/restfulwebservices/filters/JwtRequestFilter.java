@@ -40,8 +40,9 @@ public class JwtRequestFilter extends OncePerRequestFilter{
         if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            //done by spring automatically but in this case we have to specify
             if(jwtTokenUtil.validateToken(jwt,userDetails)){
+
+                //done by spring automatically but in this case we have to specify
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails,null,
                                 userDetails.getAuthorities());

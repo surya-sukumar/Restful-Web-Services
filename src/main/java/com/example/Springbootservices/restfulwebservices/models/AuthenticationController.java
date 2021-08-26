@@ -33,6 +33,7 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity createAuthToken(@RequestBody AuthenticateRequest authenticateRequest) throws Exception {
         try {
+            //getting the standard token and getting to authenticate
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticateRequest.getUsername(),
                             authenticateRequest.getPassword()));
